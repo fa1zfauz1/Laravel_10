@@ -7,7 +7,7 @@ agent:
 global_job_config:
   prologue:
     commands:
-      - sem-version php 8.2.x
+      - sem-version php 8.2.3
 blocks:
   - name: Install Dependencies
     task:
