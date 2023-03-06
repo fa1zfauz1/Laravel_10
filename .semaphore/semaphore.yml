@@ -1,22 +1,78 @@
 version: v1.0
-name: Test MyApp
+name: Semaphore acapxasyraf/Laravel_10 Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu2004
-
+    os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - sem-version php 8.2.x
 blocks:
-  - name: Test
+  - name: Install Dependencies
     task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
       jobs:
-        - name: Test
+        - name: composer
           commands:
             - checkout
             - cache restore
             - composer install
+            - npm install
             - cache store
             - cp .env.example .env
-            - php artisan key:generate
-            - mkdir -p database
-            - touch database/database.sqlite
+            - 'php artisan key:generate'
+  - name: Run Code Analysis
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - composer install
+          - npm install
+      jobs:
+        - name: phpmd
+          commands:
+            - php vendor/bin/phpmd app/ text phpmd_ruleset.xml
+        - name: phpcs
+          commands:
+            - php vendor/bin/phpcs app --report-full --standard=PSR2
+        - name: phpcpd
+          commands:
+            - 'curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar'
+            - php phpcpd.phar app/ --min-lines=50
+  - name: Run Unit tests
+    task:
+      jobs:
+        - name: phpunit
+          commands:
+            - checkout
+            - cache restore
+            - composer install
+            - npm install
             - ./vendor/bin/phpunit
+  - name: Run Browser tests
+    task:
+      jobs:
+        - name: laravel dusk
+          commands:
+            - checkout
+            - cp .env.example .env
+            - touch database/database.sqlite
+            - cache restore
+            - composer install
+            - npm install
+            - 'php artisan key:generate'
+            - 'php artisan dusk:update --detect'
+            - php artisan serve --env=dusk.local --port=8010 &
+            - php artisan dusk
+  - name: Run Security Tests
+    task:
+      jobs:
+        - name: security-checker
+          commands:
+            - checkout
+            - 'docker pull solune/symfony:7.4-cli'
+            - 'docker run --rm -v $(pwd):$(pwd) -w $(pwd) solune/symfony:7.4-cli symfony check:security'
