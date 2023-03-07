@@ -9,12 +9,6 @@ global_job_config:
     commands:
       - sem-version php 8.2.2
 blocks:
-	- name: Validate Config
-    task:
-      jobs:
-        - name: Tests
-          commands:
-            - php --version
   - name: Install Dependencies
     task:
       env_vars:
