@@ -3,12 +3,12 @@ name: Semaphore acapxasyraf/Laravel_10 Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 global_job_config:
   prologue:
     commands:
       - sem-version php 8.2.3
-      - sudo apt install php-sodium
+      - apt install php-sodium
 blocks:
   - name: Install Dependencies
     task:
