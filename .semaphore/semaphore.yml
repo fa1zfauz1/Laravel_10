@@ -8,7 +8,8 @@ global_job_config:
   prologue:
     commands:
       - sem-version php 8.2.3
-      - apt install php-sodium
+      - php -v
+      - sudo apt install php-sodium
 blocks:
   - name: Install Dependencies
     task:
