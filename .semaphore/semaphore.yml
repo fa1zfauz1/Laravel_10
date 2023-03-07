@@ -9,6 +9,7 @@ global_job_config:
     commands:
       - sem-version php 8.2.3
       - php -v
+      - echo '<?php print "Hello World!\n"; ?>' > hello.php && php hello.php
       - sudo apt install php-sodium
 blocks:
   - name: Install Dependencies
