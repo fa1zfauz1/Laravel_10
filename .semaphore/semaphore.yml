@@ -7,9 +7,7 @@ agent:
 global_job_config:
   prologue:
     commands:
-      - sem-version php 8.2.3
-      - php -v
-      - echo '<?php print "Hello World!\n"; ?>' > hello.php && php hello.php
+      - sem-version php 8.2.2
       - sudo apt install php-sodium
 blocks:
   - name: Install Dependencies
