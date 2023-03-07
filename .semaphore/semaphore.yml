@@ -8,6 +8,7 @@ global_job_config:
   prologue:
     commands:
       - sem-version php 8.2.2
+      - sudo apt install ext-sodium
 blocks:
   - name: Install Dependencies
     task:
