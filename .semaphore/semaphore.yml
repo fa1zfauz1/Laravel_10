@@ -63,14 +63,13 @@ blocks:
         - name: laravel dusk
           commands:
             - checkout
-            - cp .env.example .env
+            - cp .env.dusk.local .env
             - touch database/database.sqlite
             - cache restore
             - composer update
             - composer install
             - npm install
             - 'php artisan key:generate'
-            - 'php artisan dusk:update --detect'
             - php artisan serve --env=dusk.local --port=8010 &
             - php artisan dusk
   - name: Run Security Tests
