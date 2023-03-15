@@ -50,7 +50,7 @@ blocks:
             - 'curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar'
             - php phpcpd.phar app/ --min-lines=50
     dependencies:
-      - Run Unit tests
+      - Install Dependencies
   - name: Run Unit tests
     task:
       jobs:
@@ -63,7 +63,7 @@ blocks:
             - npm install
             - ./vendor/bin/phpunit
     dependencies:
-      - Run Security Tests
+      - Run Code Analysis
   - name: Run Browser tests
     task:
       jobs:
@@ -81,7 +81,7 @@ blocks:
             - php artisan serve --env=dusk.local --port=8010 &
             - php artisan dusk
     dependencies:
-      - Install Dependencies
+      - Run Unit tests
   - name: Run Security Tests
     task:
       jobs:
