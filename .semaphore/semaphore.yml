@@ -22,6 +22,8 @@ blocks:
             - cache restore
             - composer update
             - composer install
+            - composer require --dev laravel/dusk
+            - 'php artisan dusk:install'
             - npm install
             - cache store
             - cp .env.example .env
