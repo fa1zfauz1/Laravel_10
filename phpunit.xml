@@ -6,15 +6,15 @@
 >
     <testsuites>
         <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
+            <directory suffix="Test.php">/home/semaphore/Laravel_10/tests/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
+            <directory suffix="Test.php">/home/semaphore/Laravel_10/tests/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage>
         <include>
-            <directory suffix=".php">./app</directory>
+            <directory suffix=".php">/home/semaphore/Laravel_10/app</directory>
         </include>
     </coverage>
     <php>

@@ -10,6 +10,12 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
+    /**
+     * Suppress all rules containing "unused" in this
+     * class
+     *
+     * @SuppressWarnings("unused")
+     */
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();

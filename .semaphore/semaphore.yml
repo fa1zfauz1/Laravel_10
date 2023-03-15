@@ -1,0 +1,94 @@
+version: v1.0
+name: Semaphore acapxasyraf/Laravel_10 Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  prologue:
+    commands:
+      - sem-version php 8.2.2
+      - sudo apt-get update && sudo apt-get install -y libpq-dev
+blocks:
+  - name: Install Dependencies
+    task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
+      jobs:
+        - name: composer
+          commands:
+            - checkout
+            - cache restore
+            - composer update
+            - composer install
+            - composer require --dev laravel/dusk
+            - 'php artisan dusk:install'
+            - npm install
+            - cache store
+            - cp .env.example .env
+            - 'php artisan key:generate'
+    dependencies: []
+  - name: Run Code Analysis
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - composer update
+          - composer install
+          - npm install
+      jobs:
+        - name: phpmd
+          commands:
+            - php vendor/bin/phpmd app/ text phpmd_ruleset.xml
+        - name: phpcs
+          commands:
+            - php vendor/bin/phpcs app --report-full --standard=PSR2
+        - name: phpcpd
+          commands:
+            - 'curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar'
+            - php phpcpd.phar app/ --min-lines=50
+    dependencies:
+      - Install Dependencies
+  - name: Run Unit tests
+    task:
+      jobs:
+        - name: phpunit
+          commands:
+            - checkout
+            - cache restore
+            - composer update
+            - composer install
+            - npm install
+            - ./vendor/bin/phpunit
+    dependencies:
+      - Run Code Analysis
+  - name: Run Browser tests
+    task:
+      jobs:
+        - name: laravel dusk
+          commands:
+            - checkout
+            - cp .env.dusk.local .env
+            - touch database/database.sqlite
+            - cache restore
+            - composer update
+            - composer install
+            - composer require --dev laravel/dusk
+            - 'php artisan dusk:chrome-driver --detect'
+            - 'php artisan key:generate'
+            - php artisan serve --env=dusk.local --port=8010 &
+            - php artisan dusk
+    dependencies:
+      - Run Unit tests
+  - name: Run Security Tests
+    task:
+      jobs:
+        - name: security-checker
+          commands:
+            - checkout
+            - 'docker pull solune/symfony:7.4-cli'
+            - 'docker run --rm -v $(pwd):$(pwd) -w $(pwd) solune/symfony:7.4-cli symfony check:security'
+    dependencies:
+      - Run Browser tests
