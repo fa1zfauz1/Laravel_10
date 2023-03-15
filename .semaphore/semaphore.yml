@@ -32,6 +32,7 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - composer update
           - composer install
           - npm install
       jobs:
@@ -52,6 +53,7 @@ blocks:
           commands:
             - checkout
             - cache restore
+            - composer update
             - composer install
             - npm install
             - ./vendor/bin/phpunit
@@ -64,6 +66,7 @@ blocks:
             - cp .env.example .env
             - touch database/database.sqlite
             - cache restore
+            - composer update
             - composer install
             - npm install
             - 'php artisan key:generate'
