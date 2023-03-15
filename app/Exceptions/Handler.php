@@ -39,6 +39,12 @@ class Handler extends ExceptionHandler
     /**
      * Register the exception handling callbacks for the application.
      */
+    /**
+     * Suppress all rules containing "unused" in this
+     * class
+     *
+     * @SuppressWarnings("unused")
+     */
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
