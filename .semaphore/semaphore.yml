@@ -69,8 +69,6 @@ blocks:
             - composer update
             - composer install
             - composer require --dev laravel/dusk
-						- php artisan dusk:install
-            - npm install
             - 'php artisan key:generate'
             - php artisan serve --env=dusk.local --port=8010 &
             - php artisan dusk
