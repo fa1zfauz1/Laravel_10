@@ -55,7 +55,7 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 
 test 
-
+3
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
