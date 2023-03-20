@@ -18,10 +18,15 @@ public/hot
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
+storage/sessions/
+storage/views/*.php
+storage/cache/
+storage/logs/*.log
 
-storage/*.key
+# storage/*.key
 .env
 Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
