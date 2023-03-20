@@ -53,10 +53,6 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ## Contributing
 
-
-test 
-3
-
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## Code of Conduct
@@ -66,6 +62,17 @@ In order to ensure that the Laravel community is welcoming to all, please review
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## How to run 
+For first time, please follow these steps:
+
+```
+1- (run in terminal) composer update
+2- (run in terminal) composer install
+3- (run in terminal) npm install
+4- (in terminal tab #1) php artisan serve
+5- (in terminal tab #2) npm run serve
+```
 
 ## License
 
