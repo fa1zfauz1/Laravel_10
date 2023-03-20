@@ -3,6 +3,9 @@ node_modules/
 npm-debug.log
 yarn-error.log
 /.semaphore
+storage/sessions
+storage/views
+storage/cache/data
 
 # Laravel 4 specific
 bootstrap/compiled.php
