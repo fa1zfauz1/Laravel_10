@@ -22,5 +22,4 @@ class TaskController extends Controller
             'status' => session('status'),
         ]);
     }
-
 }
