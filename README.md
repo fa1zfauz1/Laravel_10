@@ -65,12 +65,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## How to run 
 For first time, please follow these steps:
+
+```
 1- (run in terminal) composer update
 2- (run in terminal) composer install
 3- (run in terminal) npm install
 4- (in terminal tab #1) php artisan serve
 5- (in terminal tab #2) npm run serve
-6- done
+```
 
 ## License
 
