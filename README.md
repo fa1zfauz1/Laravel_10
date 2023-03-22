@@ -74,6 +74,8 @@ For first time, please follow these steps:
 5- (in terminal tab #2) npm run serve
 ```
 
+done
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
